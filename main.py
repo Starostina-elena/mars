@@ -211,5 +211,40 @@ def astronaut_selection():
         return "Форма отправлена"
 
 
+@app.route('/choice/<planet_name>')
+def choice_planet(planet_name):
+    print(type(planet_name))
+    return f'''<!doctype html>
+                <html lang="ru">
+                  <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <link rel="stylesheet" 
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+                    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+                    crossorigin="anonymous">
+                    <title>Варианты выбора</title>
+                  </head>
+                  <body>
+                    <h1>Моё предложение: {planet_name.capitalize()}</h1>
+                    <div class="alert alert-primary" role="alert">
+                      Эта планета близка к Земле;
+                    </div>
+                    <div class="alert alert-success" role="alert">
+                      На ней много необходимых ресурсов;
+                    </div>
+                    <div class="alert alert-info" role="alert">
+                      На ней есть вода и атмосфера;
+                    </div>
+                    <div class="alert alert-light" role="alert">
+                      На ней есть небольшое магнитное поле;
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                      Наконец, она просто красива!
+                    </div>
+                  </body>
+                </html>'''
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
