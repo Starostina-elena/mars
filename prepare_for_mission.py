@@ -15,5 +15,13 @@ def training(prof):
     return render_template('training.html', page_title='Заготовка', profession=prof)
 
 
+@app.route('/list_prof/<type_list>')
+def list_prof(type_list):
+    if type_list in ['ol', 'ul']:
+        return render_template('professions_list.html', page_title='Список профессий', type_list=type_list)
+    else:
+        return 'Неверный параметр'
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
