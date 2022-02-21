@@ -39,5 +39,11 @@ def auto_answer():
     return render_template('auto_answer.html', **params)
 
 
+@app.route('/distribution')
+def distribution():
+    astronauts = ['Маша', 'Петя', 'Вася', 'Даша']
+    return render_template('distribution.html', title='Размещение по каютам', names=astronauts)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
