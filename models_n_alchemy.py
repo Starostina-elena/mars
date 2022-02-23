@@ -21,6 +21,42 @@ def main():
     user.hashed_password = "cap"
     session.add(user)
     session.commit()
+
+    user = User()
+    user.surname = "Colfer"
+    user.name = "Christine"
+    user.age = 32
+    user.position = "captain's assistant"
+    user.speciality = "engineer"
+    user.address = "module_2"
+    user.email = "Chris@mars.org"
+    user.hashed_password = "Christine32"
+    session.add(user)
+    session.commit()
+
+    user = User()
+    user.surname = "Rassel"
+    user.name = "Jack"
+    user.age = 26
+    user.position = "worker"
+    user.speciality = "research engineer"
+    user.address = "module_3"
+    user.email = "Rassel@mars.org"
+    user.hashed_password = "123KHJBKJwkjn67tHGsyuwcjz_!"
+    session.add(user)
+    session.commit()
+
+    user = User()
+    user.surname = "Brown"
+    user.name = "Alex"
+    user.age = 18
+    user.position = "worker"
+    user.speciality = "research engineer"
+    user.address = "module_4"
+    user.email = "alex_brown@mars.org"
+    user.hashed_password = "alexbrown"
+    session.add(user)
+    session.commit()
     # app.run()
 
 
