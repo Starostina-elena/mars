@@ -20,4 +20,4 @@ class Jobs(SqlAlchemyBase):
                                     sqlalchemy.ForeignKey("users.id"))
 
     def __repr__(self):
-        return f'{self.id}, {self.title}, {self.content}, {self.user_id}'
+        return f'{self.id}, {self.job}, {self.team_leader}, {self.collaborators}'

@@ -14,15 +14,9 @@ def main():
     db_session.global_init("db/users_and_jobs.db")
     session = db_session.create_session()
 
-    job = Jobs()
-    job.team_leader = 1
-    job.job = 'deployment of residential modules 1 and 2'
-    job.work_size = 15
-    job.collaborators = '2, 3'
-    job.start_date = datetime.datetime.now()
-    job.is_finished = False
-    session.add(job)
-    session.commit()
+    for i in session.query(User).filter(User.address == 'module_1', User.speciality.notlike('%engineer%'),
+                                        User.position.notlike('%engineer%')):
+        print(i.id)
 
     # app.run()
 

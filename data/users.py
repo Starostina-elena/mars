@@ -29,4 +29,4 @@ class User(SqlAlchemyBase):
         return check_password_hash(self.hashed_password, password)
 
     def __repr__(self):
-        return f'<User> {self.id} {self.name} {self.email}'
+        return f'<Colonist> {self.id} {self.surname} {self.name}'

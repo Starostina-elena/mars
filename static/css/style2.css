@@ -14,10 +14,6 @@ h1.crash_access {
     background-position: bottom left -10px;
 }
 
-table, td {
-    border: 1px solid black;
-}
-
 th.table-header {
     background-color: #EEEEEE;
 }
