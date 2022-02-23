@@ -13,3 +13,35 @@ h1.crash_access {
     background-repeat: no-repeat;
     background-position: bottom left -10px;
 }
+
+table, td {
+    border: 1px solid black;
+}
+
+th.table-header {
+    background-color: #EEEEEE;
+}
+
+th.female_adult {
+    background-color: #00A287;
+}
+
+th.female_child {
+    background-color: #5ED0BD;
+}
+
+th.male_child {
+    background-color: #7373D9;
+}
+
+th.male_adult {
+    background-color: #4F4FD9;
+}
+
+tr.huge-height {
+    height: 200px;
+}
+
+th {
+    width: 250px;
+}

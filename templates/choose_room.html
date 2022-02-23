@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <h3>Оформление каюты</h3>
+    <br>
+    <table>
+        <tr style="height: 60px">
+            <th class="table-header">Цвет стен</th>
+            <th class="table-header">Эмблема</th>
+        </tr>
+        <tr class="huge-height">
+            <th class="{{ sex }}_{% if age < 21 %}child{% else %}adult{% endif %}"></th>
+            <th><img src={% if age >= 21 %}"/static/img/alien_adult.png"{% else %}"/static/img/alien_child.png"{% endif %}
+                alt="Здесь должна была быть картинка, но не нашлась"></th>
+        </tr>
+    </table>
+{% endblock %}
