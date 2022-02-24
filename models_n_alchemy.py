@@ -14,9 +14,21 @@ def main():
     db_session.global_init("db/users_and_jobs.db")
     session = db_session.create_session()
 
-    for i in session.query(User).filter(User.address == 'module_1', User.speciality.notlike('%engineer%'),
-                                        User.position.notlike('%engineer%')):
-        print(i.id)
+    jobs = session.query(Jobs).all()
+
+    team_leaders = []
+    max_len_team = 0
+
+    for i in jobs:
+        if len(i.collaborators.split(', ')) == max_len_team:
+            team_leaders.append(i.team_leader)
+        elif len(i.collaborators.split(', ')) > max_len_team:
+            team_leaders = [i.team_leader]
+            max_len_team = len(i.collaborators.split(', '))
+
+    for i in team_leaders:
+        team_lead = session.query(User).filter(User.id == i)[0]
+        print(team_lead.name, team_lead.surname)
 
     # app.run()
 
