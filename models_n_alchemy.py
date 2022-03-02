@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect
 from data import db_session
 from data.users import User
 from data.jobs import Jobs
+from data.department import Department
 
 
 app = Flask(__name__)
@@ -14,21 +15,22 @@ def main():
     db_session.global_init("db/users_and_jobs.db")
     session = db_session.create_session()
 
-    jobs = session.query(Jobs).all()
+    first_dep_collaborators = session.query(Department).filter(Department.id == 1).first().members.split(', ')
+    first_dep_collaborators = list(map(int, first_dep_collaborators))
 
-    team_leaders = []
-    max_len_team = 0
+    all_collaborators = dict()
+    for i in session.query(Jobs).filter(Jobs.is_finished).all():
+        collaborators = list(map(int, i.collaborators.split(', ')))
+        for j in collaborators:
+            if j in all_collaborators:
+                all_collaborators[j] += i.work_size
+            else:
+                all_collaborators[j] = i.work_size
 
-    for i in jobs:
-        if len(i.collaborators.split(', ')) == max_len_team:
-            team_leaders.append(i.team_leader)
-        elif len(i.collaborators.split(', ')) > max_len_team:
-            team_leaders = [i.team_leader]
-            max_len_team = len(i.collaborators.split(', '))
-
-    for i in team_leaders:
-        team_lead = session.query(User).filter(User.id == i)[0]
-        print(team_lead.name, team_lead.surname)
+    for i in first_dep_collaborators:
+        if i in all_collaborators and all_collaborators[i] > 25:
+            worker = session.query(User).filter(User.id == i).first()
+            print(worker.surname, worker.name)
 
     # app.run()
 
