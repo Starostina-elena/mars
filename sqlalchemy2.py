@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from forms.user import RegisterForm, LoginForm
+from forms.job import AddJob
 from data.users import User
 from data.jobs import Jobs
 from data import db_session
@@ -82,6 +83,15 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/addjob', methods=['GET', 'POST'])
+@login_required
+def add_job():
+    form = AddJob()
+    if form.validate_on_submit():
+        return redirect('/')
+    return render_template('add_job.html', title='Добавить работу', form=form)
 
 
 def main():
