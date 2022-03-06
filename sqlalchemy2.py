@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -99,11 +101,53 @@ def add_job():
             end_date=form.end_date.data,
             is_finished=form.is_finished.data,
             team_leader=form.team_leader.data,
+            creator=current_user.id
         )
         db_sess.add(job)
         db_sess.commit()
         return redirect('/')
-    return render_template('add_job.html', title='Добавить работу', form=form)
+    return render_template('add_job.html', title='Добавить работу', second_title='Adding a job', form=form)
+
+
+@app.route('/editjob/<int:job_id>', methods=['GET', 'POST'])
+@login_required
+def edit_job(job_id):
+    form = AddJob()
+    if request.method == "GET":
+        db_sess = db_session.create_session()
+        if current_user.id == 1:
+            job = db_sess.query(Jobs).filter(Jobs.id == job_id).first()
+        else:
+            job = db_sess.query(Jobs).filter(Jobs.id == job_id, Jobs.creator == current_user.id).first()
+        if job:
+            form.title.data = job.job
+            form.work_size.data = job.work_size
+            form.team_leader.data = job.team_leader
+            form.collaborators.data = job.collaborators
+            form.start_date.data = job.start_date
+            form.end_date.data = job.end_date
+            form.is_finished.data = job.is_finished
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        if current_user.id == 1:
+            job = db_sess.query(Jobs).filter(Jobs.id == job_id).first()
+        else:
+            job = db_sess.query(Jobs).filter(Jobs.id == job_id, Jobs.creator == current_user.id).first()
+        if job:
+            job.job = form.title.data
+            job.work_size = form.work_size.data
+            job.team_leader = form.team_leader.data
+            job.collaborators = form.collaborators.data
+            job.start_date = form.start_date.data
+            job.end_date = form.end_date.data
+            job.is_finished = form.is_finished.data
+            db_sess.commit()
+            return redirect('/')
+        else:
+            abort(404)
+    return render_template('add_job.html', title='Редактирование работа', second_title='Edit job', form=form)
 
 
 def main():
