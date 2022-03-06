@@ -90,6 +90,18 @@ def login():
 def add_job():
     form = AddJob()
     if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        job = Jobs(
+            job=form.title.data,
+            work_size=form.work_size.data,
+            collaborators=form.collaborators.data,
+            start_date=form.start_date.data,
+            end_date=form.end_date.data,
+            is_finished=form.is_finished.data,
+            team_leader=form.team_leader.data,
+        )
+        db_sess.add(job)
+        db_sess.commit()
         return redirect('/')
     return render_template('add_job.html', title='Добавить работу', form=form)
 
