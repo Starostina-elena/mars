@@ -150,6 +150,22 @@ def edit_job(job_id):
     return render_template('add_job.html', title='Редактирование работа', second_title='Edit job', form=form)
 
 
+@app.route('/deletejob/<int:job_id>', methods=['GET', 'POST'])
+@login_required
+def news_delete(job_id):
+    db_sess = db_session.create_session()
+    if current_user.id == 1:
+        job = db_sess.query(Jobs).filter(Jobs.id == job_id).first()
+    else:
+        job = db_sess.query(Jobs).filter(Jobs.id == job_id, Jobs.creator == current_user.id).first()
+    if job:
+        db_sess.delete(job)
+        db_sess.commit()
+    else:
+        abort(404)
+    return redirect('/')
+
+
 def main():
     db_session.global_init("db/users_and_jobs.db")
     app.run()
