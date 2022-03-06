@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous">
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <br>
+    {% if "инженер" in profession or "строитель" in profession %}
+        <h5>Инженерные тренажеры</h5>
+        <img src="/static/img/fly1.png" alt="Здесь должна была быть картинка, но не нашлась">
+    {% else %}
+        <h5>Научные симуляторы</h5>
+        <img src="/static/img/fly2.png" alt="Здесь должна была быть картинка, но не нашлась">
+    {% endif %}
+    {% endblock %}
+</body>
+</html>
