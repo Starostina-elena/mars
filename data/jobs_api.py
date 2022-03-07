@@ -3,6 +3,7 @@ from flask import request
 
 from . import db_session
 from .jobs import Jobs
+from .users import User
 
 
 blueprint = flask.Blueprint(
@@ -45,6 +46,12 @@ def create_jobs():
                  ['job', 'work_size', 'collaborators', 'start_date', 'end_date', 'is_finished', 'team_leader', 'creator']):
         return flask.jsonify({'error': 'Bad request'})
     db_sess = db_session.create_session()
+    is_teamlead_exist = db_sess.query(User).filter(User.id == request.json['team_leader']).first()
+    if not is_teamlead_exist:
+        return flask.jsonify({'error': 'Team leader does not exist'})
+    is_creator_exist = db_sess.query(User).filter(User.id == request.json['creator']).first()
+    if not is_creator_exist:
+        return flask.jsonify({'error': 'Creator does not exist'})
     job = Jobs(
         job=request.json['job'],
         work_size=request.json['work_size'],
