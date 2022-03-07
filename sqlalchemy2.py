@@ -15,6 +15,11 @@ login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
