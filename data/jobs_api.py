@@ -82,3 +82,31 @@ def delete_news(job_id):
     db_sess.delete(job)
     db_sess.commit()
     return flask.jsonify({'success': 'OK'})
+
+
+@blueprint.route('/api/jobs/<int:job_id>', methods=['PUT'])
+def edit_news(job_id):
+    db_sess = db_session.create_session()
+    job = db_sess.query(Jobs).get(job_id)
+    if not job:
+        return flask.jsonify({'error': 'Not found'})
+    if 'id' in request.json:
+        job.id = request.json['id']
+    if 'job' in request.json:
+        job.job = request.json['job']
+    if 'work_size' in request.json:
+        job.work_size = request.json['work_size']
+    if 'collaborators' in request.json:
+        job.collaborators = request.json['collaborators']
+    if 'start_date' in request.json:
+        job.start_date = request.json['start_date']
+    if 'end_date' in request.json:
+        job.end_date = request.json['end_date']
+    if 'is_finished' in request.json:
+        job.is_finished = request.json['is_finished']
+    if 'team_leader' in request.json:
+        job.team_leader = request.json['team_leader']
+    if 'creator' in request.json:
+        job.creator = request.json['creator']
+    db_sess.commit()
+    return flask.jsonify({'success': 'OK'})

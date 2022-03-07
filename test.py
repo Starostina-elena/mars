@@ -1,7 +1,12 @@
-from requests import delete, get
+from requests import put
 
-print(delete('http://127.0.0.1:5000/api/jobs/1').json())  # корректный запрос
-print(delete('http://127.0.0.1:5000/api/jobs/1000').json())  # некорректный запрос - нет такого id
-print(delete('http://127.0.0.1:5000/api/jobs/aaa').json())  # некорректный запрос - id строка
-
-print(get('http://127.0.0.1:5000/api/jobs').json())
+print(put('http://127.0.0.1:5000/api/jobs/1',
+          json={'id': 4,
+                'job': 'Building main house222',
+                'work_size': 20,
+                'collaborators': '3, 4',
+                'start_date': None,
+                'end_date': None,
+                'is_finished': False,
+                'team_leader': 1,
+                'creator': 5}).json())  # корректный запрос
