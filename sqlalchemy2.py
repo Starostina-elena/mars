@@ -41,7 +41,8 @@ def index():
             'team_leader': teamlead.name + ' ' + teamlead.surname,
             'duration': i.work_size,
             'collaborators': i.collaborators,
-            'finished': i.is_finished
+            'finished': i.is_finished,
+            'creator': i.creator
         }
         data.append(to_add_to_data)
 
