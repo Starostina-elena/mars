@@ -55,6 +55,12 @@ def create_jobs():
         team_leader=request.json['team_leader'],
         creator=request.json['creator']
     )
+    if 'id' in request.json:
+        is_id_exists = db_sess.query(Jobs).filter(Jobs.id == request.json['id']).first()
+        if is_id_exists:
+            return flask.jsonify({'error': 'Id already exists'})
+        else:
+            job.id = request.json['id']
     db_sess.add(job)
     db_sess.commit()
     return flask.jsonify({'success': 'OK'})
