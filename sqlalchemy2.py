@@ -1,13 +1,13 @@
 import datetime
 
-from flask import Flask, render_template, redirect, request, abort
+from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from forms.user import RegisterForm, LoginForm
 from forms.job import AddJob
 from data.users import User
 from data.jobs import Jobs
-from data import db_session
+from data import db_session, jobs_api
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -169,6 +169,7 @@ def news_delete(job_id):
 
 def main():
     db_session.global_init("db/users_and_jobs.db")
+    app.register_blueprint(jobs_api.blueprint)
     app.run()
 
 
