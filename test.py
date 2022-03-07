@@ -1,6 +1,11 @@
-from requests import get
+from requests import get, post
 
-print(get('http://127.0.0.1:5000/api/jobs').json())  # корректный запрос - все работы
-print(get('http://127.0.0.1:5000/api/jobs/1').json())  # корректный запрос - одна работа
-print(get('http://127.0.0.1:5000/api/jobs/100').json())  # некорректный запрос - нет такого id
-print(get('http://127.0.0.1:5000/api/jobs/aaa').json())  # некорректный запрос - строка вместо id
+print(post('http://127.0.0.1:5000/api/jobs',
+           json={'job': 'Building main house',
+                 'work_size': 20,
+                 'collaborators': '3, 4',
+                 'start_date': None,
+                 'end_date': None,
+                 'is_finished': True,
+                 'team_leader': 1,
+                 'creator': 5}).json())
