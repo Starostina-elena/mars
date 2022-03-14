@@ -3,6 +3,8 @@ import datetime
 from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
+from flask_restful import reqparse, abort, Api, Resource
+
 from forms.user import RegisterForm, LoginForm
 from forms.job import AddJob
 from forms.form_department import AddDepartment
@@ -14,6 +16,7 @@ from data.department import Department
 from data import db_session, jobs_api
 
 app = Flask(__name__)
+api = Api(app, catch_all_404s=True)
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
