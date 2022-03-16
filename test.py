@@ -1,20 +1,19 @@
 from requests import post, get, delete
 
-print(post('http://127.0.0.1:5000/api/v2/users',
+print(post('http://127.0.0.1:5000/api/v2/jobs',
            json={'id': 6,
-                 'surname': 'awf',
-                 'name': 'skbv',
-                 'age': 34,
-                 'position': None,
-                 'speciality': None,
-                 'address': None,
-                 'email': '121@mars.org',
-                 'password': '12345'}).json())  # корректный запрос
+                 'job': 'awf',
+                 'work_size': 20,
+                 'collaborators': '3, 4',
+                 'start_date': None,
+                 'end_date': None,
+                 'is_finished': None,
+                 'team_leader': 1}).json())  # корректный запрос
 
-print(delete('http://127.0.0.1:5000/api/v2/users/1').json())  # корректный запрос
-print(delete('http://127.0.0.1:5000/api/v2/users/600').json())  # корректный запрос
+print(delete('http://127.0.0.1:5000/api/v2/jobs/6').json())  # корректный запрос
+print(delete('http://127.0.0.1:5000/api/v2/jobs/600').json())  # некорректный запрос
 
-print(get('http://localhost:5000/api/v2/users').json())
-print(get('http://localhost:5000/api/v2/users/4').json())
-print(get('http://localhost:5000/api/v2/users/6').json())
-print(get('http://localhost:5000/api/v2/users/q').json())
+print(get('http://localhost:5000/api/v2/jobs').json())  # корректный запрос
+print(get('http://localhost:5000/api/v2/jobs/3').json())  # корректный запрос
+print(get('http://localhost:5000/api/v2/jobs/6').json())  # некорректный запрос
+print(get('http://localhost:5000/api/v2/jobs/q').json())  # некорректный запрос
