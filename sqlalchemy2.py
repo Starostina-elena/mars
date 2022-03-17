@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -268,7 +269,8 @@ def delete_department(dep_id):
 def main():
     db_session.global_init("db/users_and_jobs.db")
     app.register_blueprint(jobs_api.blueprint)
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == '__main__':
