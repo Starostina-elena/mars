@@ -7,7 +7,7 @@ from .users import User
 
 
 blueprint = flask.Blueprint(
-    'news_api',
+    'jobs_api',
     __name__,
     template_folder='templates'
 )

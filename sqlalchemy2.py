@@ -14,7 +14,7 @@ from data.users import User
 from data.jobs import Jobs
 from data.department import Department
 
-from data import db_session, jobs_api
+from data import db_session, jobs_api, users_api
 
 app = Flask(__name__)
 api = Api(app, catch_all_404s=True)
@@ -269,6 +269,7 @@ def delete_department(dep_id):
 def main():
     db_session.global_init("db/users_and_jobs.db")
     app.register_blueprint(jobs_api.blueprint)
+    app.register_blueprint(users_api.blueprint)
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
 
