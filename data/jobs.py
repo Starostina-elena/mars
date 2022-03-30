@@ -19,6 +19,9 @@ class Jobs(SqlAlchemyBase, SerializerMixin):
     team_leader = sqlalchemy.Column(sqlalchemy.Integer,
                                     sqlalchemy.ForeignKey("users.id"))
     creator = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=True)
+    categories = orm.relation("Category",
+                              secondary="jobs_to_category",
+                              backref="jobs")
 
     def __repr__(self):
         return f'{self.id}, {self.job}, {self.team_leader}, {self.collaborators}'

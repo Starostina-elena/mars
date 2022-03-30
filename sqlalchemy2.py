@@ -12,6 +12,7 @@ from forms.form_department import AddDepartment
 
 from data.users import User
 from data.jobs import Jobs
+from data.category import Category
 from data.department import Department
 
 from data import db_session, jobs_api, users_api
