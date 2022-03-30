@@ -21,7 +21,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-sys.path.insert(0, 'C:\Users\Лена\PycharmProjects\mars')
+sys.path.insert(0, 'C://Users/Лена/PycharmProjects/mars')
 from data.db_session import SqlAlchemyBase
 import data.__all_models
 target_metadata = SqlAlchemyBase.metadata
