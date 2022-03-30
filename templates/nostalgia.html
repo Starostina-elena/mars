@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="text-align: center">Nostalgia</h1>
+    <h2 style="text-align: center">{{ name }}</h2>
+    <h4 style="text-align: center; color: black">Hometown {{ city }}</h4>
+    <br>
+    <div style="text-align: center">
+        <img src="{{ yandex_maps_request }}" alt="Похоже, при загрузке картинки произошла ошибка">
+    </div>
+{% endblock %}

@@ -25,7 +25,7 @@ def get_users():
 
 
 @blueprint.route('/api/users/<int:user_id>', methods=['GET'])
-def get_one_job(user_id):
+def get_one_user(user_id):
     db_sess = db_session.create_session()
     user = db_sess.query(User).get(user_id)
     if not user:

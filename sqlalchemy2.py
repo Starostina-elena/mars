@@ -16,6 +16,11 @@ from data.department import Department
 
 from data import db_session, jobs_api, users_api
 
+from Samples_yandex_maps_api import geocoder
+
+from requests import get
+
+
 app = Flask(__name__)
 api = Api(app, catch_all_404s=True)
 login_manager = LoginManager()
@@ -264,6 +269,21 @@ def delete_department(dep_id):
     else:
         abort(404)
     return redirect('/departments')
+
+
+@app.route('/users_show/<int:user_id>')
+def nostalgia(user_id):
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).filter(User.id == user_id).first()
+    if user:
+        user = get(f'http://localhost:5000/api/users/{user_id}').json()
+        ll, spn = geocoder.get_ll_span(user['users']['city_from'])  # адрес
+        return render_template('nostalgia.html', title='Ностальгия',
+                               name=user['users']['name'] + ' ' + user['users']['surname'],
+                               city=user['users']['city_from'],
+                               yandex_maps_request=f"http://static-maps.yandex.ru/1.x/?ll={ll}&spn={spn}&l=sat")
+    else:
+        return render_template('message.html', title='Ошибка', message='Нет такого id')
 
 
 def main():
