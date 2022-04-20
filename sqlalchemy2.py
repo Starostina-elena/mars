@@ -287,6 +287,18 @@ def nostalgia(user_id):
         return render_template('message.html', title='Ошибка', message='Нет такого id')
 
 
+@app.route('/gallery', methods=['GET', 'POST'])
+def gallery():
+    if request.method == "GET":
+        return render_template('carousel.html', title='Красная планета', number_pics=len(os.listdir('static\\img\\mars_carousel')))
+    elif request.method == 'POST':
+        f = request.files['file']
+        with open(f'static\\img\\mars_carousel\\mars_carousel_{len(os.listdir("static/img/mars_carousel")) + 1}.jpg', mode='wb') as file:
+            file.write(f.read())
+        return render_template('carousel.html', title='Красная планета',
+                               number_pics=len(os.listdir('static\\img\\mars_carousel')))
+
+
 def main():
     db_session.global_init("db/users_and_jobs.db")
     app.register_blueprint(jobs_api.blueprint)
