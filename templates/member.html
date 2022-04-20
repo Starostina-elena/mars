@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set user = json_file|random %}
+<h3>{{ user['name'] }} {{ user['surname'] }}</h3>
+<div style="text-align: center">
+    <img src="{{ user['photo'] }}" alt="Похоже, фото нет">
+</div>
+<br>
+<h5 style="text-align: center">Професии</h5>
+<p style="text-align: center">
+    {% for profession in user['professions']|sort %}
+    {{ profession }}
+    <br>
+    {% endfor %}
+</p>
+{% endblock %}

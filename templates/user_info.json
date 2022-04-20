@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Ridley",
+    "surname": "Scott",
+    "photo": "static/img/alien_adult.png",
+    "professions": ["research engineer", "engineer"]
+  },
+  {
+    "name": "Christine",
+    "surname": "Colfer",
+    "photo": "static/img/alien_child.png",
+    "professions": ["research engineer", "scientist"]
+  },
+  {
+    "name": "Jack",
+    "surname": "Rassel",
+    "photo": "static/img/alien_child.png",
+    "professions": ["scientist", "engineer"]
+  },
+  {
+    "name": "Alex",
+    "surname": "Brown",
+    "photo": "static/img/alien_adult.png",
+    "professions": ["research engineer", "engineer", "scientist"]
+  }
+]

@@ -1,5 +1,6 @@
 import datetime
 import os
+from json import loads
 
 from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -297,6 +298,13 @@ def gallery():
             file.write(f.read())
         return render_template('carousel.html', title='Красная планета',
                                number_pics=len(os.listdir('static\\img\\mars_carousel')))
+
+
+@app.route('/member')
+def member():
+    with open('templates/user_info.json', encoding='utf-8') as file:
+        json_file = loads(file.read())
+    return render_template('member.html', title='Member', json_file=json_file)
 
 
 def main():
